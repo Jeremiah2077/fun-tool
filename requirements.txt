@@ -1,0 +1,23 @@
+# FunGen Live Screen - Requirements
+
+# Core dependencies
+numpy>=1.24.0
+opencv-python>=4.8.0
+mss>=9.0.0
+
+# YOLO and deep learning
+ultralytics>=8.3.0
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Image processing
+pillow>=10.0.0
+
+# Data processing
+scipy>=1.10.0
+
+# FunGen original project dependencies
+msgpack>=1.0.0
+
+# Optional: CUDA support (for NVIDIA GPU)
+# Install command: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118

@@ -76,17 +76,20 @@ Modular plugin architecture for advanced signal manipulation:
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone https://github.com/Jeremiah2077/fun-tool.git
 cd fun-tool
 ```
 
 2. **Install dependencies**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 3. **Install PyTorch with CUDA support** (for GPU acceleration)
+
 ```bash
 # For CUDA 11.8
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
@@ -102,11 +105,13 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 ### Basic Usage
 
 **Screen Capture Mode** (Real-time):
+
 ```bash
 python fungen_live.py
 ```
 
 **Programmatic API**:
+
 ```python
 from tracker.tracker_manager import TrackerManager
 from funscript.dual_axis_funscript import DualAxisFunscript
@@ -193,13 +198,13 @@ fungen_live_screen/
 
 ### Tracking Modes
 
-| Mode | Description | Use Case |
-|------|-------------|----------|
-| `yolo_roi` | YOLO-assisted ROI detection | Object-based tracking with automatic region selection |
-| `user_roi` | Manual ROI selection | Precise control over tracking region |
-| `oscillation` | Automatic oscillation detection | Periodic motion pattern analysis |
-| `optical_flow` | Dense optical flow tracking | High-precision motion field analysis |
-| `contact_analysis` | Contact point detection | Interaction-based tracking |
+| Mode               | Description                     | Use Case                                              |
+| ------------------ | ------------------------------- | ----------------------------------------------------- |
+| `yolo_roi`         | YOLO-assisted ROI detection     | Object-based tracking with automatic region selection |
+| `user_roi`         | Manual ROI selection            | Precise control over tracking region                  |
+| `oscillation`      | Automatic oscillation detection | Periodic motion pattern analysis                      |
+| `optical_flow`     | Dense optical flow tracking     | High-precision motion field analysis                  |
+| `contact_analysis` | Contact point detection         | Interaction-based tracking                            |
 
 ### Output Formats
 
@@ -209,14 +214,14 @@ fungen_live_screen/
 
 ### Keyboard Controls (Live Mode)
 
-| Key | Function |
-|-----|----------|
-| `S` | Start/Stop tracking |
-| `R` | Reset tracking data |
-| `G` | Toggle graph window |
-| `D` | Toggle 3D simulator |
-| `O` | Toggle info overlay |
-| `Q/ESC` | Exit application |
+| Key     | Function            |
+| ------- | ------------------- |
+| `S`     | Start/Stop tracking |
+| `R`     | Reset tracking data |
+| `G`     | Toggle graph window |
+| `D`     | Toggle 3D simulator |
+| `O`     | Toggle info overlay |
+| `Q/ESC` | Exit application    |
 
 ---
 
@@ -320,11 +325,11 @@ The framework leverages GPU acceleration at multiple levels:
 
 ### Benchmarks
 
-| Configuration | FPS | Latency | GPU Usage |
-|---------------|-----|---------|-----------|
-| RTX 3060 + YOLO | 28-32 | <35ms | 45-60% |
-| RTX 4070 + YOLO | 55-60 | <18ms | 30-40% |
-| CPU Only (no YOLO) | 15-20 | <50ms | N/A |
+| Configuration      | FPS   | Latency | GPU Usage |
+| ------------------ | ----- | ------- | --------- |
+| RTX 3060 + YOLO    | 28-32 | <35ms   | 45-60%    |
+| RTX 4070 + YOLO    | 55-60 | <18ms   | 30-40%    |
+| CPU Only (no YOLO) | 15-20 | <50ms   | N/A       |
 
 ---
 
@@ -333,6 +338,7 @@ The framework leverages GPU acceleration at multiple levels:
 ### Supported Video Formats
 
 **Standard Formats:**
+
 - MP4 (H.264, H.265/HEVC)
 - AVI (various codecs)
 - MKV (Matroska)
@@ -340,12 +346,14 @@ The framework leverages GPU acceleration at multiple levels:
 - WebM (VP8, VP9)
 
 **VR/Stereoscopic Formats:**
+
 - Side-by-Side (SBS) - Half/Full
 - Top-Bottom (TB) - Half/Full
 - Equirectangular 360°
 - Fisheye
 
 **Live Sources:**
+
 - Screen capture (MSS library)
 - Webcam/USB cameras
 - RTSP/RTMP streams
@@ -361,13 +369,13 @@ The framework leverages GPU acceleration at multiple levels:
 
 ### System Requirements
 
-| Component | Minimum | Recommended | Professional |
-|-----------|---------|-------------|--------------|
-| CPU | Intel i5-8400 / Ryzen 5 2600 | Intel i7-10700 / Ryzen 7 3700X | Intel i9-12900K / Ryzen 9 5950X |
-| RAM | 8 GB | 16 GB | 32 GB |
-| GPU | GTX 1060 6GB | RTX 3060 12GB | RTX 4070 Ti 12GB |
-| Storage | 5 GB HDD | 20 GB SSD | 50 GB NVMe SSD |
-| CUDA | 11.0+ | 11.8+ | 12.1+ |
+| Component | Minimum                      | Recommended                    | Professional                    |
+| --------- | ---------------------------- | ------------------------------ | ------------------------------- |
+| CPU       | Intel i5-8400 / Ryzen 5 2600 | Intel i7-10700 / Ryzen 7 3700X | Intel i9-12900K / Ryzen 9 5950X |
+| RAM       | 8 GB                         | 16 GB                          | 32 GB                           |
+| GPU       | GTX 1060 6GB                 | RTX 3060 12GB                  | RTX 4070 Ti 12GB                |
+| Storage   | 5 GB HDD                     | 20 GB SSD                      | 50 GB NVMe SSD                  |
+| CUDA      | 11.0+                        | 11.8+                          | 12.1+                           |
 
 ---
 
@@ -376,6 +384,7 @@ The framework leverages GPU acceleration at multiple levels:
 ### Algorithm Overview
 
 **Motion Detection Pipeline:**
+
 1. YOLO object detection (YOLOv8 architecture)
 2. Bounding box tracking with Kalman filtering
 3. Contact point analysis using intersection-over-union (IoU)
@@ -384,10 +393,12 @@ The framework leverages GPU acceleration at multiple levels:
 6. Signal smoothing (Savitzky-Golay filter, order 3, window 11)
 
 **Dual-Axis Tracking:**
+
 - **Primary Axis (L0)**: Vertical motion, range [0, 100]
 - **Secondary Axis (L1)**: Rotation/lateral, range [-90°, +90°]
 
 **Frequency Analysis:**
+
 - Peak detection using `scipy.signal.find_peaks`
 - Moving window FFT (window size: 60 frames)
 - Amplitude normalization and outlier rejection
@@ -467,28 +478,35 @@ This framework builds upon cutting-edge research and open-source projects:
 ## 📧 Contact & Support
 
 ### Issues & Bug Reports
+
 - **GitHub Issues**: [Report a bug](https://github.com/Jeremiah2077/fun-tool/issues)
 - **Feature Requests**: [Suggest a feature](https://github.com/Jeremiah2077/fun-tool/issues/new?template=feature_request.md)
 
 ### Community
+
 - **Discussions**: [GitHub Discussions](https://github.com/Jeremiah2077/fun-tool/discussions)
 - **Discord**: [Join our server](#)
 
 ### Professional Support
+
 For commercial licensing and enterprise support inquiries:
-- Email: support@fungen-project.com
+
+- Email: 2077jeremiah@gmail.com
 
 ---
 
 ## 🔒 Security & Privacy
 
 ### Data Processing
+
 - **Local Processing**: All video analysis is performed locally on your machine
 - **No Telemetry**: No usage data or video content is transmitted externally
 - **Secure Storage**: SQLite databases use local filesystem encryption when available
 
 ### Responsible Use
+
 This tool is designed for legitimate research, development, and analysis purposes. Users must:
+
 - Comply with all applicable laws and regulations
 - Respect privacy and consent requirements
 - Use the software ethically and responsibly
@@ -499,6 +517,7 @@ This tool is designed for legitimate research, development, and analysis purpose
 ## 📚 Documentation
 
 ### Additional Resources
+
 - **[User Guide](docs/user_guide.md)**: Comprehensive usage instructions
 - **[API Reference](docs/api_reference.md)**: Detailed API documentation
 - **[Plugin Development](funscript/user_plugins/PLUGIN_DEVELOPMENT_GUIDE.md)**: Plugin creation tutorial
@@ -510,18 +529,21 @@ This tool is designed for legitimate research, development, and analysis purpose
 ## 🎯 Roadmap
 
 ### Version 0.6.0 (Q1 2025)
+
 - [ ] Real-time multi-object tracking
 - [ ] Enhanced VR format support
 - [ ] Web-based visualization dashboard
 - [ ] RESTful API for remote processing
 
 ### Version 0.7.0 (Q2 2025)
+
 - [ ] TensorRT optimization for inference
 - [ ] Transformer-based tracking models
 - [ ] Cloud processing support
 - [ ] Mobile app integration
 
 ### Long-term Goals
+
 - [ ] Multi-camera synchronization
 - [ ] 3D pose estimation integration
 - [ ] Real-time streaming protocol
@@ -539,7 +561,7 @@ This tool is designed for legitimate research, development, and analysis purpose
 
 **Built with precision. Powered by AI. Made for researchers and developers.**
 
-*FunGen Live Screen v0.5.4 - Advanced Video Motion Intelligence*
+_FunGen Live Screen v0.5.4 - Advanced Video Motion Intelligence_
 
 ---
 
@@ -554,4 +576,4 @@ This tool is designed for legitimate research, development, and analysis purpose
 
 ---
 
-*For educational, research, and development purposes. Use responsibly.*
+_For educational, research, and development purposes. Use responsibly._
